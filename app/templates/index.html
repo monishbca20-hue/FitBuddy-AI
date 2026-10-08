@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}FitBuddy — your next week, made personal{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="pulse"></span> YOUR PERSONAL TRAINING COMPANION</div>
+    <h1>A plan that<br>moves <em>with you.</em></h1>
+    <p class="hero-lede">A little structure goes a long way. Tell us what you’re working toward and get a thoughtful, seven-day fitness plan made for your pace.</p>
+    <div class="hero-note"><span class="note-icon">✳</span><span><strong>Small steps. Real momentum.</strong><br>Strength, recovery, and nutrition advice in one place.</span></div>
+  </div>
+  <div class="form-card">
+    <div class="card-heading"><div><span class="step-label">LET’S GET TO KNOW YOU</span><h2>Build your plan</h2></div><span class="card-spark">✳</span></div>
+    <p class="card-intro">A few details help us tailor your week.</p>
+    {% if error %}<div class="alert" role="alert">{{ error }}</div>{% endif %}
+    <form action="/generate-workout" method="post" class="profile-form">
+      <label>Your name<input name="username" required minlength="2" maxlength="80" placeholder="e.g. Alex Morgan" autocomplete="name"></label>
+      <label>Choose a user ID<input name="user_id" required minlength="3" maxlength="40" pattern="[A-Za-z0-9_-]+" placeholder="e.g. alex_01" aria-describedby="user-id-help"><small id="user-id-help">Use this ID to find your plan and send feedback later.</small></label>
+      <div class="field-row">
+        <label>Age<input name="age" type="number" min="16" max="100" required placeholder="28"></label>
+        <label>Weight <span class="unit">kg</span><input name="weight_kg" type="number" min="26" max="350" step="0.1" required placeholder="68"></label>
+      </div>
+      <label>What are you working toward?
+        <select name="goal" required><option value="" disabled selected>Choose your focus</option><option value="weight_loss">Weight loss</option><option value="muscle_gain">Muscle gain</option><option value="general_wellness">General wellness</option><option value="flexibility">Flexibility & mobility</option></select>
+      </label>
+      <fieldset><legend>Choose your intensity</legend><div class="intensity-options">
+        <label class="intensity-option"><input type="radio" name="intensity" value="low" required><span><b>Easy</b><small>Gentle start</small></span></label>
+        <label class="intensity-option"><input type="radio" name="intensity" value="medium"><span><b>Steady</b><small>Balanced pace</small></span></label>
+        <label class="intensity-option"><input type="radio" name="intensity" value="high"><span><b>Focused</b><small>More challenge</small></span></label>
+      </div></fieldset>
+      <button class="button button-primary" type="submit">Create my 7-day plan <span aria-hidden="true">→</span></button>
+      <p class="privacy-note">Your profile and plans are saved locally in this app’s SQLite database.</p>
+    </form>
+  </div>
+</section>
+<section class="how" id="how-it-works"><div><span class="step-label">A ROUTINE THAT FITS REAL LIFE</span><h2>Good plans leave<br>room to be human.</h2></div><div class="how-grid">
+  <article><span class="how-number">01</span><h3>Made for your goal</h3><p>Get a week of movement shaped around what matters to you and the energy you want to bring.</p></article>
+  <article><span class="how-number">02</span><h3>Flexible by design</h3><p>Share feedback when your needs change. Your plan can change with them.</p></article>
+  <article><span class="how-number">03</span><h3>Progress includes rest</h3><p>Recovery belongs in the plan. Start comfortably and adjust as you learn what works.</p></article>
+</div></section>
+<div class="safety-note">FitBuddy provides general fitness information, not medical advice. If you have a health condition, injury, or concerns about exercise, talk with a qualified health professional before starting.</div>
+{% endblock %}

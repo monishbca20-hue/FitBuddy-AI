@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Your plan — FitBuddy{% endblock %}
+{% block content %}
+<section class="result-shell">
+  <a class="back-link" href="/">← Back to your profile</a>
+  <div class="result-heading"><div><span class="step-label">YOUR WEEK, YOUR WAY</span><h1>{% if updated %}A fresh take, {{ profile.username }}.{% else %}You’ve got this, {{ profile.username }}.{% endif %}</h1><p>A steady plan is a good place to begin. Make it yours as you go.</p></div><span class="mode-pill"><i></i>{{ mode }} {% if mode == 'Demo' %}mode{% else %}powered{% endif %}</span></div>
+  {% if updated %}<div class="success-banner"><span>✓</span> Your plan has been updated with your feedback.</div>{% endif %}
+  <div class="profile-strip"><div><span>FOCUS</span><strong>{{ goal_label }}</strong></div><div><span>PACE</span><strong>{{ profile.intensity|title }}</strong></div><div><span>AGE</span><strong>{{ profile.age }}</strong></div><div><span>USER ID</span><strong>{{ profile.user_id }}</strong></div></div>
+  <div class="result-grid">
+    <section class="plan-card"><div class="section-title"><div><span class="step-label">THE MOVEMENT</span><h2>Your 7-day plan</h2></div><span class="title-icon">↗</span></div><pre class="plan-text">{{ workout_plan }}</pre></section>
+    <aside class="side-column"><section class="tip-card"><span class="step-label">A LITTLE EXTRA CARE</span><h2>Fuel & recovery</h2><p>{{ nutrition_tip }}</p><div class="tip-footer"><span>✳</span> Progress is built one day at a time.</div></section>
+      <section class="feedback-card"><span class="step-label">MAKE IT YOURS</span><h2>Want to adjust something?</h2><p>Tell us what you’d like to change and we’ll shape the week around it.</p><form action="/submit-feedback" method="post"><input type="hidden" name="user_id" value="{{ profile.user_id }}"><label for="feedback">Your feedback</label><textarea name="feedback" id="feedback" rows="4" required minlength="5" maxlength="1000" placeholder="More walking, gentler mornings, an extra rest day…"></textarea><button class="button button-dark" type="submit">Update my plan <span>→</span></button></form></section>
+    </aside>
+  </div>
+  <div class="safety-note">Keep the effort comfortable and use good form. Stop for pain, dizziness, or unusual shortness of breath. This general plan is not medical advice.</div>
+</section>
+{% endblock %}

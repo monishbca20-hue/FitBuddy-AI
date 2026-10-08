@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101511">
+  <title>{% block title %}FitBuddy{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">F</span><span>fitbuddy<span class="brand-dot">.</span></span></a>
+    <nav><a href="/#how-it-works">How it works</a><a class="nav-cta" href="/docs">API docs <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer><span>FitBuddy</span><span>Move at your pace. Build a routine that lasts.</span><a href="/docs">Developer API</a></footer>
+</body>
+</html>
